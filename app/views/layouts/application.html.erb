@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Source</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <% if flash[:success].present? %>
+      <div class="flash flash--success">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+
+    <% if flash[:error].present? %>
+      <div class="flash flash--error">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
+
+    <header>
+      <h1>Source</h1>
+      <%= link_to "Home", root_path %>
+      <nav>
+        <% if is_logged_in? %>
+          Hi <%= @current_user.name %>!
+          <%= link_to "Log Out", session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_path %> /
+          <%= link_to "Login", new_session_path %>
+        <% end %>
+      </nav>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>
