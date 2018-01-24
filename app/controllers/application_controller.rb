@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
     session[:user_id].present?
   end
 
+
+  def force_login
+    unless is_logged_in?
+      flash[:error] = "You must sign up to view this page"
+      redirect_to new_user_path
+    end
+  end
+
 end
